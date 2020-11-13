@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Clarifai from 'clarifai';
 import Navigation from './components/Navigation/Navigation';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import Logo from './components/Logo/Logo';
@@ -6,6 +7,10 @@ import Rank from './components/Rank/Rank';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 
 import './App.css';
+
+const app = new Clarifai.App({
+  apiKey: '673c58cffe8748df8c86cce61c2bedee'
+});
 
 class App extends Component {
   // States
@@ -22,6 +27,19 @@ class App extends Component {
   }
   onButtonSubmit = () => {
     this.setState({imageUrl:this.state.input});
+    app.models
+      .predict(
+        // Configure which clarifai model must be used
+        Clarifai.FACE_DETECT_MODEL, 
+        this.state.input) 
+      .then(
+        function(response) {
+          console.log(response.outputs[0].data.regions[0].region_info.bounding_box);
+        },
+        function(err) {
+          // there was an error
+        }
+    );
   }
 
   render() {
