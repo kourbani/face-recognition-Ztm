@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Clarifai from 'clarifai';
 import SignIn from './components/SignIn/SignIn';
+import Register from './components/Register/Register';
 import Navigation from './components/Navigation/Navigation';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import Logo from './components/Logo/Logo';
@@ -21,7 +22,8 @@ class App extends Component {
       input: '',
       imageUrl: '',
       box: {},
-      route: 'signin'
+      route: 'signin',
+      isSignedIn: false
     };
   }
 
@@ -59,15 +61,19 @@ class App extends Component {
 
   onRouteChange = (route) => {
     this.setState({route: route});
+    if(route === 'home') {
+      this.setState({isSignedIn: true})
+    } else {
+      this.setState({isSignedIn: false})
+    }
   }
 
   render() {
     return (
     <div className="App">
-      <Navigation onRouteChange = {this.onRouteChange}/>
-      { this.state.route === 'signin' ?
-        <SignIn onRouteChange = {this.onRouteChange}/>
-        :<div>
+      <Navigation  onRouteChange = {this.onRouteChange} isSignedIn = {this.state.isSignedIn}/>
+      { this.state.route === 'home' ?
+        <div>
           <Logo />
           <Rank />
           <ImageLinkForm 
@@ -76,6 +82,11 @@ class App extends Component {
           />    
           <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl}/>
          </div>
+        : (
+            this.state.route === 'signin' ?
+            <SignIn onRouteChange = {this.onRouteChange}/>
+            : <Register onRouteChange = {this.onRouteChange} />
+          )
       }
     </div>
   );
