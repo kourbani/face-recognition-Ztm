@@ -69,9 +69,11 @@ class App extends Component {
   }
 
   render() {
+    // Destructuring
+    const { isSignedIn , imageUrl , route , box } = this.state;
     return (
     <div className="App">
-      <Navigation  onRouteChange = {this.onRouteChange} isSignedIn = {this.state.isSignedIn}/>
+      <Navigation  onRouteChange = {this.onRouteChange} isSignedIn = {isSignedIn}/>
       { this.state.route === 'home' ?
         <div>
           <Logo />
@@ -80,10 +82,10 @@ class App extends Component {
             onInputChange={this.onInputChange}
             onButtonSubmit={this.onButtonSubmit}
           />    
-          <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl}/>
+          <FaceRecognition box={box} imageUrl={imageUrl}/>
          </div>
         : (
-            this.state.route === 'signin' ?
+            route === 'signin' ?
             <SignIn onRouteChange = {this.onRouteChange}/>
             : <Register onRouteChange = {this.onRouteChange} />
           )
