@@ -25,8 +25,8 @@ const initialState = {
     name: '',
     email: '',
     entries: 0,
-    joined: '',
-  },
+    joined: ''
+  }
 };
 
 class App extends Component {
@@ -89,6 +89,7 @@ class App extends Component {
           .then(count => {
             this.setState(Object.assign(this.state.user, {entries: count}))
           })
+          .catch(console.log); // Error handling
         }
         this.displayFaceBox(this.calculateFaceLocation(response))
       })
@@ -97,11 +98,12 @@ class App extends Component {
 
   onRouteChange = (route) => {
     this.setState({route: route});
-    if(route === 'home') {
-      this.setState({isSignedIn: true});
-    } else {
+    if(route === 'signout') {
       this.setState(initialState);
+    } else if(route === 'home'){
+      this.setState({isSignedIn: true});
     }
+    this.setState({route: route});
   }
 
   render() {
