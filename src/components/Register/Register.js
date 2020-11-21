@@ -25,7 +25,7 @@ class Register extends React.Component {
 
   onSumbitSignIn = (event) => {
     event.preventDefault();
-    fetch(`${_SERVER}/register`, {
+    fetch(`${_SERVER}register`, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

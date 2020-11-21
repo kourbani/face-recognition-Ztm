@@ -21,7 +21,7 @@ class SignIn extends React.Component {
 
   onSumbitSignIn = (event) => {
     event.preventDefault();
-    fetch(`${_SERVER}/signin`, {
+    fetch(`${_SERVER}signin`, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

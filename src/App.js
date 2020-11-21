@@ -68,7 +68,7 @@ class App extends Component {
   
   onButtonSubmit = () => {
     this.setState({imageUrl:this.state.input});
-      fetch(`${_SERVER}/imageurl`, {
+      fetch(`${_SERVER}imageurl`, {
           method: 'post',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -78,7 +78,7 @@ class App extends Component {
         .then(response => response.json())
         .then((response) => {
           if (response) {
-            fetch(`${_SERVER}/image`, {
+            fetch(`${_SERVER}image`, {
               method: 'put',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
