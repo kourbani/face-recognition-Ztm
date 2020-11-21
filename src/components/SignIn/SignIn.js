@@ -1,5 +1,7 @@
 import React from 'react';
 
+const _SERVER = 'https://whispering-anchorage-19828.herokuapp.com/';
+
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
@@ -19,21 +21,21 @@ class SignIn extends React.Component {
 
   onSumbitSignIn = (event) => {
     event.preventDefault();
-    fetch('http://localhost:3000/signin', {
+    fetch(`${_SERVER}/signin`, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         email: this.state.signInEmail,
         password: this.state.signInPassword,
-      })
+      }),
     })
-    .then(response => response.json())
-    .then(user => {
-      if(user.id) {
-        this.props.loadUser(user);
-        this.props.onRouteChange('home');
-      }
-    });  
+      .then((response) => response.json())
+      .then((user) => {
+        if (user.id) {
+          this.props.loadUser(user);
+          this.props.onRouteChange('home');
+        }
+      });  
   }
 
   render() {

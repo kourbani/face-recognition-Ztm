@@ -9,6 +9,8 @@ import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 
 import './App.css';
 
+const _SERVER = 'https://whispering-anchorage-19828.herokuapp.com/';
+
 const initialState = {
   input: '',
   imageUrl: '',
@@ -66,7 +68,7 @@ class App extends Component {
   
   onButtonSubmit = () => {
     this.setState({imageUrl:this.state.input});
-      fetch('http://localhost:3000/imageurl', {
+      fetch(`${_SERVER}/imageurl`, {
           method: 'post',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -76,7 +78,7 @@ class App extends Component {
         .then(response => response.json())
         .then((response) => {
           if (response) {
-            fetch('http://localhost:3000/image', {
+            fetch(`${_SERVER}/image`, {
               method: 'put',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({

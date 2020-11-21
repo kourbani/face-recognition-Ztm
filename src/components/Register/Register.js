@@ -1,4 +1,5 @@
 import React from 'react';
+const _SERVER = 'https://whispering-anchorage-19828.herokuapp.com/';
 
 class Register extends React.Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class Register extends React.Component {
 
   onSumbitSignIn = (event) => {
     event.preventDefault();
-    fetch('http://localhost:3000/register', {
+    fetch(`${_SERVER}/register`, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
